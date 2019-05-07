@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // toda vez que tiver um caminho que inicie com ~ deve ser referenciado para src
+      "~/*": ["src/*"]
+    }
+  }
+}
