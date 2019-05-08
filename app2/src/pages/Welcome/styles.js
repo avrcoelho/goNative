@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.secundary,
     flex: 1,
-    padding: matrics.basePadding * 2,
+    padding: metrics.basePadding * 2,
     justifyContent: 'center',
     // todo os elementos vão ocupar a largura total da pagina
     alignItems: 'stretch',
@@ -24,6 +24,12 @@ const styles = StyleSheet.create({
     marginTop: metrics.baseMargin,
     fontSize: 15,
     lineHeight: 21,
+  },
+
+  error: {
+    color: colors.danger,
+    textAlign: 'center',
+    marginTop: metrics.baseMargin * 2,
   },
 
   form: {

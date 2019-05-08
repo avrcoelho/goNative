@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-
 import {
-  View, Text, TextInput, TouchableOpacity, StatusBar, AsyncStorage
+  View, Text, TextInput, TouchableOpacity, StatusBar, AsyncStorage, ActivityIndicator,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import styles from './styles';
 
@@ -12,8 +12,15 @@ export default class Welcome extends Component {
   // essa função vai lidar com o fluxo que precisa fazer
   state = {
     username: '',
+    loading: false,
+    error: false,
   };
 
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
+  };
 
   checkUserExists = async (username) => {
     const user = await api.get(`/users/${username}`);
@@ -30,20 +37,23 @@ export default class Welcome extends Component {
     // quando se usa o navigation por padrão ele retorna um propriedade
     const { navigation } = this.props;
 
+    this.setState({ loading: true });
+
     try {
       await this.checkUserExists(username);
       await this.saveUser(username);
 
       navigation.navigate('Repositories');
     } catch (err) {
+      this.setState({ error: true });
       console.tron.log('Not found');
+    } finally {
+      this.setState({ loading: false });
     }
-
-
   };
 
   render() {
-    const { username } = this.state;
+    const { username, loading, error } = this.state;
 
     return (
       <View styles={styles.container}>
@@ -52,6 +62,8 @@ export default class Welcome extends Component {
         <Text style={styles.text}>
           Para continuar precisamos que você informe seu usuário no Github
         </Text>
+
+        {error && <Text style={styles.error}>Usuário inexistente.</Text>}
 
         <View style={styles.form}>
           <TextInput
@@ -68,7 +80,7 @@ export default class Welcome extends Component {
           />
 
           <TouchableOpacity style={styles.button} onPress={this.signIn}>
-            <Text style={styles.buttonText}>Prosseguir</Text>
+            {loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Prosseguir</Text>}
           </TouchableOpacity>
         </View>
       </View>

@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import '~/config/ReactotronConfig';
 
-import Routes from './routes';
+import createNavigator from './routes';
 
-const App = () => <Routes />;
+export default class App extends Component {
+  state = {
+    userChecked: false,
+    userLogged: false,
+  }
 
-export default App;
+  async componentDidMount() {
+    const username = AsyncStorage.getItem('@Gihuner:username');
+
+    // !! troca o valor para booleano
+    this.setState({ userChecked: true, userLogged: !!username });
+  }
+
+  render() {
+    const { userChecked, userLogged } = this.state;
+
+    // para não retornar nada
+    if (!userChecked) return null;
+
+    const Routes = createNavigator(userLogged);
+
+    return <Routes />;
+  }
+}
