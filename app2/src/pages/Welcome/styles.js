@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 
   form: {
-    marinTop: metrics.baseMargin * 2,
+    marginTop: metrics.baseMargin * 2,
   },
 
   input: {

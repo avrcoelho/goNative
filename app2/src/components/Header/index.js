@@ -24,8 +24,7 @@ class Header extends Component {
     await AsyncStorage.clear();
 
     navigation.navigate('Welcome');
-  }
-
+  };
 
   render() {
     const { title } = this.props;
@@ -35,7 +34,7 @@ class Header extends Component {
         {/* barStyle: cor da font */}
         <StatusBar barStyle="dark-content" />
         <View style={styles.left} />
-        <Text style={styleMedia.title}>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
         <TouchableOpacity onPress={this.signOut}>
           <Icon name="exchange" size={16} style={styles.icon} />
         </TouchableOpacity>

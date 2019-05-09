@@ -8,13 +8,13 @@ export default class App extends Component {
   state = {
     userChecked: false,
     userLogged: false,
-  }
+  };
 
   async componentDidMount() {
-    const username = AsyncStorage.getItem('@Gihuner:username');
+    const username = await AsyncStorage.getItem('@Githuber:username');
 
     // !! troca o valor para booleano
-    this.setState({ userChecked: true, userLogged: !!username });
+    await this.setState({ userChecked: true, userLogged: !!username });
   }
 
   render() {
