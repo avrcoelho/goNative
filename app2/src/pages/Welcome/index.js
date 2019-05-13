@@ -29,7 +29,7 @@ export default class Welcome extends Component {
   }
 
   saveUser = async (username) => {
-    await AsyncStorage.setItem('@Gihuner:username', username);
+    await AsyncStorage.setItem('@Githuber:username', username);
   }
 
   signIn = async () => {
@@ -43,12 +43,10 @@ export default class Welcome extends Component {
       await this.checkUserExists(username);
       await this.saveUser(username);
 
-      navigation.navigate('Repositories');
+      navigation.navigate('User');
     } catch (err) {
-      this.setState({ error: true });
+      this.setState({ error: true, loading: false });
       console.tron.log('Not found');
-    } finally {
-      this.setState({ loading: false });
     }
   };
 
@@ -56,7 +54,7 @@ export default class Welcome extends Component {
     const { username, loading, error } = this.state;
 
     return (
-      <View styles={styles.container}>
+      <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Text style={styles.title}>Bem vindo</Text>
         <Text style={styles.text}>

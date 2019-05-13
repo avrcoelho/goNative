@@ -8,7 +8,7 @@ export default {
   darker: '#333',
   black: '#000',
 
-  // cor que mais aparece na palicação
+  // cor que mais aparece na palicação"
   primary: '#7A91CA',
   secundary: '#444A5A',
   success: '#9DCA83',
@@ -16,5 +16,5 @@ export default {
 
   transparent: 'transparent',
   darkTransparent: 'rgba(0,0,0.0.6)',
-  whiteTransparent: 'rgba(255,255,255.0.3)',
+  whiteTransparent: 'rgba(255,255,255,0.3)',
 };

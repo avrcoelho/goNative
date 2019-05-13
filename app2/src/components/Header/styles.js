@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: metrics.basePadding,
+    backgroundColor: colors.white,
   },
 
   title: {
@@ -25,6 +26,5 @@ const styles = StyleSheet.create({
     color: colors.darker,
   },
 });
-
 
 export default styles;
