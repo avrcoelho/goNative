@@ -1,6 +1,6 @@
 // essa função vai criar o estado global
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducer from './reducers/login';
+import reducer from './reducers';
 
 const composer = __DEV__
   ? compose(
