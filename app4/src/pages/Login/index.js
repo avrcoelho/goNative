@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
-
+import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as LoginActions from '~/store/actions/login';
+import { Creators as LoginActions } from '~/store/ducks/login';
 
 import {
   Container, Input, Button, ButtonText, Error,
 } from './styles';
-import api from '~/services/api';
-
 
 class Login extends Component {
+  // oculta o header da cena
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     username: '',
   }
 
   handleSubmit = async () => {
     const { username } = this.state;
-    const { loginSuccess, loginFailure, navigation } = this.props;
 
-    try {
-      await api.get(`users/${username}`);
-
-      loginSuccess(username);
-
-      navigation.navigate('Repositories');
-
-    } catch (err) {
-      loginFailure();
-    }
+    const { loginRequest } = this.props;
+    
+    loginRequest(username)
   }
 
   render() {
     const { username } = this.state;
-    const { error } = this.props;
+    const { error, loading } = this.props;
 
     return (
       <Container>
@@ -41,13 +36,13 @@ class Login extends Component {
 
         <Input
           value={username}
-          onChange={text => this.setSate({ username: text })}
+          onChangeText={text => this.setState({ username: text })}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Digite seu usuário"
         />
         <Button onPress={this.handleSubmit}>
-          <ButtonText>Entrar</ButtonText>
+          {loading ? <ActivityIndicator size="small" color="#FFF" /> : <ButtonText>Entrar</ButtonText>}
         </Button>
       </Container>
     );
@@ -56,6 +51,7 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   error: state.login.error,
+  loading: state.login.loading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(LoginActions, dispatch);
