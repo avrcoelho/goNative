@@ -16,6 +16,12 @@ class Main extends Component {
     loadRequest();
   }
 
+  handlePodcastPress = (podcast) => {
+    const { navigation } = this.props;
+
+    navigation.navigate('Podcast', { podcast });
+  };
+
   render() {
     const { podcasts } = this.props;
 
@@ -31,7 +37,7 @@ class Main extends Component {
           // renomei o item para o que quiser
           renderItem={({ item: podcast }) => (
             // renderiza um botão para clique
-            <Podcast onPress={() => {}}>
+            <Podcast onPress={() => this.handlePodcastPress(podcast)}>
               <Cover source={{ uri: podcast.cover }} />
               <Info>
                 <Title>{podcast.title}</Title>
@@ -51,4 +57,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(PodcastsActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Main);
