@@ -8,6 +8,11 @@ const { Types, Creators } = createActions({
   setPodcastRequest: ['podcast', 'episodeId'],
   setPodcastSuccess: ['podcast'],
   setCurrent: ['id'],
+  play: null,
+  pause: null,
+  next: null,
+  prev: null,
+  reset: null,
 });
 
 // Types: {LOAD_REQUEST, LOAD_SUCCESS, LOAD_FAILURE}
@@ -28,6 +33,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   podcast: null,
   current: null,
+  playing: false,
 });
 
 // Reducer
@@ -39,4 +45,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   //  action type na esquerda e o que vai acontecer na direita
   [Types.SET_PODCAST_SUCCESS]: (state, action) => state.merge({ podcast: action.podcast, current: action.podcast.tracks[0].id }),
   [Types.SET_CURRENT]: (state, action) => state.merge({ current: action.id }),
+  [Types.PLAY]: state => state.merge({ playing: true }),
+  [Types.PAUSE]: state => state.merge({ playing: false }),
+  [Types.RESET]: state => state.merge({ podcast: null, current: null, playing: false }),
 });

@@ -41,7 +41,7 @@ class Main extends Component {
               <Cover source={{ uri: podcast.cover }} />
               <Info>
                 <Title>{podcast.title}</Title>
-                <Count>{`${podcast.tracks.length}`}</Count>
+                <Count>{`${podcast.tracks.length} episódios`}</Count>
               </Info>
             </Podcast>
           )}
